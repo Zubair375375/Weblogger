@@ -1,0 +1,312 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+/* Ensure to include this in your stylesheet, e.g., application.css or a dedicated stylesheet file */
+
+/* Remove default list styling */
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Adds space between cards */
+  }
+  
+  /* Card styling */
+  .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden;
+    width: 300px; /* Adjust the width as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #fff; /* White background */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
+  }
+  
+  /* Card image styling */
+  .card-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Crop image to cover area */
+  }
+  
+  /* Link styling */
+  .card-link {
+    /* display: block; */
+    /* padding: 1rem; */
+    text-align: center;
+    color: #333; /* Dark gray text */
+    text-decoration: none;
+    font-size: 1.1rem; /* Slightly larger text */
+    font-weight: bold;
+  }
+  
+  /* Add hover effects */
+  .card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+  }
+  
+.image-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .card-image {
+    display: block;
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+    z-index: 0; /* Ensure image is behind the overlay */
+  }
+
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 0, 128, 0.4); /* Initial purple shade */
+    transition: background 0.3s ease; /* Smooth transition on hover */
+    z-index: 1; /* Ensure the overlay is above the image */
+  }
+
+  .image-container:hover .image-overlay {
+    background: rgba(255, 255, 255, 0); /* Darker purple on hover */
+  }
+
+  
+  #users {
+    display: flex; /* Use flexbox for horizontal alignment */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding: 1rem; /* Padding for aesthetics */
+    white-space: nowrap; /* Prevent wrapping */
+    animation: scroll 10s linear infinite; /* Change 10s to a shorter duration for faster scrolling */
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0); /* Start position */
+    }
+    100% {
+      transform: translateX(-100%); /* End position */
+    }
+  }
+
+  #users::-webkit-scrollbar {
+    height: 8px; /* Custom scrollbar height */
+  }
+  
+  #users::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded edges */
+  }
+  
+
+  .blog-post {
+    margin-bottom: 2rem;
+    background-color: #f8f9fa; /* Light background for contrast */
+    padding: 1.5rem; /* Extra padding */
+    border-radius: 0.25rem; /* Slightly rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .blog-post-title {
+    font-size: 1.5rem; /* Larger title font */
+  }
+  
+  .blog-post-meta {
+    color: #6c757d; /* Muted color for meta information */
+    font-size: 0.9rem; /* Smaller font size */
+  }
+  
+  blockquote {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-left: 0.25rem solid #007bff; /* Left border for emphasis */
+    background-color: #e9ecef; /* Background for blockquotes */
+  }
+  
+
+  /* ///////////////////////// */
+
+  .profile-header {
+    background-color: #8b0000;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+  }
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  .profile-card {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .track-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  .comment-section {
+    margin-top: 20px;
+  }
+
+
+
+
+  /* /////////////////// */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 20rem; /* Full width */
+    height: 40%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* //////////////////// */
+
+  /* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #5A5A5A;
+  font-weight: bold;
+}
+
+.navbar .brand {
+  font-size: 1.5rem;
+  color: #D46DF9;
+}
+
+/* Hero Section Styles */
+.hero {
+  height: 100vh;
+  background: url('cs.png') no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  position: relative;
+  top: 70px; /* to account for the navbar height */
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: #D46DF9;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.download-btn {
+  padding: 15px 30px;
+  background-color: #D46DF9;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #A050D4;
+}
+
+.dropdown-item {
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.dropdown-item:hover {
+  color: #FF6633; /* Color change on hover */
+}

@@ -1,0 +1,24 @@
+<%= form_with model: [@article, @article.comments.build], local: true, class: "form" do |form| %>
+          <div class="d-flex align-items-start mb-4">
+            <!-- User Avatar -->
+            <div class="user-avatar rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px;">
+              <%= image_tag current_user.avatar, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+            </div>
+            
+            <!-- Comment Input Field -->
+            <div class="flex-grow-1" style="margin: 0.4rem">
+              <div class="input-group">
+                <%= form.text_area :body, class: "form-control", placeholder: "Add a comment...", rows: 1, style: "resize: none;" %>
+                <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+            </div>
+          </div>
+          <p>
+            <%= form.label :status %><br>
+            <%= form.select :status, Visible::VALID_STATUSES, selected: 'public' %>
+          </p>
+
+        <% end %>
+
+
+        

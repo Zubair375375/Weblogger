@@ -1,0 +1,22 @@
+<%= form_with(model: IntroVideo.new, local: true, method: :post, class: "mx-auto p-4 shadow-sm rounded", style: "max-width: 600px; background-color: #f8f9fa;") do |form| %>
+    <% if intro_video.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(intro_video.errors.count, "error") %> prohibited this video from being saved:</h4>
+      <ul>
+        <% intro_video.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :IntroVideo %>
+    <%= form.file_field :IntroVideo %>
+  </div>
+
+  <div class="d-grid">
+    <%= form.submit "Save Changes", class: "btn btn-block", style: "background-color: purple; color: white" %>
+  </div>
+
+<% end %>

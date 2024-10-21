@@ -1,0 +1,22 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh; min-width: 100vw; background-image: url('https://th.bing.com/th/id/R.82820ba6117ee323a0692bcc94b91f13?rik=UWx8uHtvxnqpyQ&pid=ImgRaw&r=0'); background-size: cover; background-position: center;">
+  <div class="card p-4 shadow-lg" style="width: 100%; max-width: 500px; background-color: white; border-radius: 10px;">
+    <h2 class="text-center mb-4">Forgot your password?</h2>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field mb-3">
+        <%= f.label :email, class: 'form-label' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      </div>
+
+      <div class="actions text-center">
+        <%= f.submit "Send me reset password instructions", class: 'btn btn-block text-white', style:"background-color: #4E1380" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container-fluid d-flex justify-content-center align-items-center vh-100" style="background-image: url('https://th.bing.com/th/id/R.82820ba6117ee323a0692bcc94b91f13?rik=UWx8uHtvxnqpyQ&pid=ImgRaw&r=0'); background-size: cover; background-position: center;">
+  <div class="col-md-6 col-lg-5 bg-white p-5 rounded shadow-lg">
+    <h2 class="text-center mb-4">Sign up</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="form-group mb-3">
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Enter your email" %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label :password, class: "form-label" %>
+        <% if @minimum_password_length %>
+          <small class="text-muted d-block mb-2">(<%= @minimum_password_length %> characters minimum)</small>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Create a password" %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label :password_confirmation, class: "form-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Confirm your password" %>
+      </div>
+
+      <div class="d-grid gap-2">
+        <%= f.submit "Sign up", class: "btn btn-lg", style:"background-color: #4E1380; color: white" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

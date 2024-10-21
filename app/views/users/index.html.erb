@@ -1,0 +1,273 @@
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #FF6633; position: fixed; z-index: 10; top: 0; width: 100%">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">
+      <img src="<%= asset_path('logo.png') %>" alt="Logo" style="width: 6rem; margin-left: 1rem"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+
+      <div class="dropdown">
+        <a class="d-flex align-items-center" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <% if current_user.avatar.attached? %>
+            <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; width: 40px; height: 40px;" class="rounded-circle" alt="User Image">
+          <%= image_tag current_user.avatar, class: "rounded-circle", style: "width: 40px; height: 40px; object-fit: cover;" %>
+            </div>
+          <% end %>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><%= link_to "See profile", user_path(current_user), class: "dropdown-item" %></li>
+          <li><%= link_to "Edit Profile", edit_user_path(current_user), class: "dropdown-item" %></li>
+          <li><%= link_to "Log out", destroy_user_session_path, class: "dropdown-item" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+<div class="container" style="margin-top: 6rem">
+  <div class="row">
+    <!-- Left Side - Profile Card -->
+    <div class="col-md-3" style="margin-top: 9rem">
+      <div class="profile-card" style="margin-top: 5rem; background-color: white; padding: 0.6rem 1.2rem; position: relative; bottom: 14rem; box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.04);">
+        <!-- Dummy Avatar -->
+        <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden;">
+          <% if current_user.avatar.attached? %> 
+            <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden;">
+              <%= image_tag current_user.avatar, style: "width: 100%; height: 100%; object-fit: cover;" %>
+            </div>
+          <% else %>
+            <img src="https://via.placeholder.com/150" alt="User" class="rounded-circle me-3">
+          <% end %>        
+          </div>
+        <h4><%= current_user.name %></h4>
+        <p><%= current_user.state %>, <%= current_user.country %></p>
+
+        <!-- Dummy Follow Button -->
+        <button class="btn" style="background-color: #FF6633; color: white;">Follow</button>
+        <hr>
+
+        <div class="about-section">
+          <h5>About</h5>
+          <p class="text-muted" style="margin-bottom: -0.6rem"><%= current_user.bio %></p>
+          <a href="#" class="btn btn-link" style="margin-left: -0.8rem; margin-bottom: 0.6rem; color: #FF6633;">Edit</a>
+
+          <h5>Email</h5>
+          <p class="text-muted mb-1"><%= current_user.email %></p>
+
+          <div style="margin-top: 1rem">
+            <p>Followers: <strong><%= current_user.followers.count %></strong></p>
+            <p>Following: <strong><%= current_user.following.count %></strong></p>
+            <p>Articles: <strong><%= current_user.articles.count %></strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Middle Section - Articles/Posts -->
+    <div class="col-md-6" style="margin-left: 0rem; margin-right: 0rem">
+      <%= form_with(model: @article, local: true, class: "form") do |form| %>
+        <div class="mb-3" style="margin-left: 1rem; margin-top: 1rem">
+          <%# <%= form.label :title, class: "form-label" %>
+          <%= form.text_field :title, class: "form-control", placeholder: "Title" %>
+          <% @article.errors.full_messages_for(:title).each do |message| %>
+            <div class="text-danger mt-1">
+              <%= message %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mb-3" style="margin-left: 1rem">
+          <%# <%= form.label :image, 'Upload Image', class: "form-label" %>
+          <%= form.file_field :image, class:"form-control" %>
+        </div>
+
+        <div class="mb-3" style="margin-left: 1rem">
+          <%# <%= form.label :body, class: "form-label" %>
+          <%= form.text_area :body, class: "form-control", rows: 5, placeholder: "Go with article.." %>
+          <% @article.errors.full_messages_for(:body).each do |message| %>
+            <div class="text-danger mt-1">
+              <%= message %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mb-3" style="margin-left: 1rem; float: right">
+          <%= form.submit "Submit", class: "btn btn-primary" %>
+        </div>
+
+        <div style="margin-left: 1rem; margin-bottom: 2rem">
+          <%# <%= form.label :status %>
+          <%= form.select :status, Visible::VALID_STATUSES, selected: @article.status || 'public' %>
+        </div>
+      <% end %>
+
+      <div class="feed">
+
+        <%# <% if @article.length >= 1 %>
+        <ul class="card-list" style="width: 80rem; display: block; list-style: none; padding: 0;">
+          <% @articles.each do |t| %>
+            <% unless t.archived? %>
+              <li class="card text-black" style="position: relative; overflow: hidden; margin-bottom: 2rem; border: none; display: block; width: 40rem; height: 30rem;">
+                <% if t.image.attached? %>
+                  <div class="image-container" style="position: relative; overflow: hidden; height: 24rem;">
+                    <%= image_tag t.image, class: "card-image", style: "height: 100%; width: 40rem; object-fit: cover;" %>
+                    <!-- Purple overlay -->
+                    <div class="image-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: background 0.3s ease; font-size: 3rem;"></div>
+                  </div>
+                <% end %>
+
+                <div class="comment align-items-center mb-3" style="margin: 0.6rem;">
+                  <div style="display: flex; justify-content: space-between; bottom: 1rem">
+                    <div style="display: flex; align-items: center; margin-top: -0.5rem">
+                      <% if t.user.avatar.attached? %>
+                        <div class="comment-user-avatar rounded-circle overflow-hidden" style="width: 30px; height: 30px; margin-right: 10px;">
+                          <%= image_tag t.user.avatar, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+                        </div>
+                      <% end %>
+                      <div class="comment-content">
+                        <h6 class="comment-user-name mb-0">
+                          <%= link_to t.user.name, article_path(t), style: "color: black; text-decoration: none;" %>
+                        </h6>
+                      </div>
+                      <div class="comment-content">
+                        <h6 class="comment-user-name mb-0">
+                          <%= link_to User.find(t.user_id).followers.count, article_path(t), style: "color: black; text-decoration: none;" %>
+                        </h6>
+                      </div>
+                    </div>
+                    <div style="font-size: 0.7rem; color: gray; font-style: italic; position: relative;">
+                      <%= time_ago_in_words(t.created_at) %>
+                    </div>
+                  </div>
+                  <div style="margin: 0 2.5rem; margin-top: -0.1rem">
+                      <div class="comment-content">
+                        <p class="comment-user-name mb-0" style="color: gray">
+                          <%# <%= link_to t.body, article_path(t), style: "color: black; text-decoration: none;" %>
+                          <%= link_to truncate(t.body, length: 100), article_path(t), style: "color: black; text-decoration: none;" %>
+                        </p>
+                      </div>
+                  </div>
+                </div>
+
+                <!-- Three-dot dropdown button -->
+                <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
+                  <button class="btn btn-secondary text-black" type="button" style="background-color: transparent; border: none;">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                </div>
+
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+
+
+        <%= link_to "Create New", new_article_path, class: "btn btn-success btn-lg my-3", style: "background-color: #FF6633; border: none" %>
+        <%= link_to "See all", home_path, class: "btn btn-success btn-lg my-3", style: "background-color: #FF6633; border: none" %>
+        
+        
+      <%# <% end %>
+        <!-- Dummy Article 1 -->
+        <div class="article-card mb-4 p-3" style="background-color: white; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);">
+          <h4>Dummy Article Title 1</h4>
+          <p class="text-muted">By Jane Doe on October 18, 2024</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis auctor lectus a gravida luctus...</p>
+          <a href="#" class="btn btn-link" style="color: #FF6633;">Read more</a>
+        </div>
+
+        <!-- Dummy Article 2 -->
+        <div class="article-card mb-4 p-3" style="background-color: white; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);">
+          <h4>Dummy Article Title 2</h4>
+          <p class="text-muted">By John Smith on October 17, 2024</p>
+          <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
+          <a href="#" class="btn btn-link" style="color: #FF6633;">Read more</a>
+        </div>
+
+        <!-- Dummy Article 3 -->
+        <div class="article-card mb-4 p-3" style="background-color: white; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);">
+          <h4>Dummy Article Title 3</h4>
+          <p class="text-muted">By Sarah Lee on October 16, 2024</p>
+          <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan...</p>
+          <a href="#" class="btn btn-link" style="color: #FF6633;">Read more</a>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Right Side - Widgets/Advertisements -->
+    <div class="col-md-3">
+      <div class="widget-card mb-4 p-3" style="background-color: white; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);">
+        <h5>Trending News</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" style="color: #FF6633;">Breaking: Major Event Happening Now</a></li>
+          <li><a href="#" style="color: #FF6633;">Tech Giant Announces New Product</a></li>
+          <li><a href="#" style="color: #FF6633;">Stock Market Update</a></li>
+        </ul>
+      </div>
+
+      <div class="widget-card mb-4 p-3" style="background-color: white; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);">
+        <h5>Promoted</h5>
+        <img src="https://via.placeholder.com/200x100" alt="Ad" style="width: 100%;">
+        <p class="text-muted">Ad description goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+
+      <div class="widget-card mb-4 p-3" style="background-color: white; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);">
+        <h5>Upcoming Events</h5>
+        <p>Event Name - October 20, 2024</p>
+        <p>Event Name - November 1, 2024</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Users" %>
+
+<h1 class="text-center my-4">Users</h1>
+
+
+<div id="users" class="d-flex flex-wrap justify-content-center gap-4">
+  <% @users.each do |user| %>
+    <div class="card shadow-sm" style="width: 18rem;">
+      <div class="card-body text-center">
+        
+        <% if user.avatar.attached? %>
+          <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin: auto;">
+            <%= image_tag user.avatar, style: "width: 100%; height: 100%; object-fit: cover;" %>
+          </div>
+        <% else %>
+          <div style="width: 120px; height: 120px; border-radius: 50%; background-color: #e0e0e0; margin: auto;">
+                          <img src="https://via.placeholder.com/120" alt="User" class="rounded-circle me-3">
+
+          </div>
+        <% end %>
+
+        <h5 class="mt-3"><%= user.name %></h5>
+        <p class="text-muted"><%= user.email %></p>
+        
+        <%= link_to "See profile", user, class: "btn text-primary", style:"margin-top: -2rem" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="text-center mt-4">
+  <%= link_to "Main", articles_path, class: "btn", style:"background-color: purple; color: white" %>
+</div>
+

@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Reactor_id: 1
+  Reacted_id: 1
+
+two:
+  Reactor_id: 1
+  Reacted_id: 1

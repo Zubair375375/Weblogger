@@ -1,0 +1,14 @@
+<div class="container my-4">
+  <h2>Profile Share Details</h2>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title">Shared User: <%= User.find(@profile_share.user_id).name %></h5>
+      <p class="card-text">Shared By: <%= User.find(@profile_share.current_user_id).name %></p>
+      <p class="card-text">Shared At: <%= @profile_share.shared_at %></p>
+    </div>
+    <div class="card-footer">
+      <%= link_to 'Back to List', profile_shares_path, class: "btn btn-secondary" %>
+      <%= link_to 'Delete', profile_share_path(@profile_share), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    </div>
+  </div>
+</div>

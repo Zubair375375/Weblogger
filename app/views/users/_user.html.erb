@@ -1,0 +1,289 @@
+<% if @user == current_user %>
+<% if @user.cover_image.attached? %>
+<div class="profile-header" style="position: relative; background-image: url('<%= rails_blob_url(@user.cover_image) %>'); height: 14rem; background-repeat: no-repeat; background-size: cover;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
+    <span style="display: flex; align-items: center; color: #737373; cursor: pointer; position: absolute; top: 11rem; left: 80rem; z-index: 999;"><svg style="margin-right: -0.4rem" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#737373" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 487 487" xml:space="preserve" stroke="#bababa">
+
+    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g id="SVGRepo_iconCarrier"> <g> <g> <path d="M308.1,277.95c0,35.7-28.9,64.6-64.6,64.6s-64.6-28.9-64.6-64.6s28.9-64.6,64.6-64.6S308.1,242.25,308.1,277.95z M440.3,116.05c25.8,0,46.7,20.9,46.7,46.7v122.4v103.8c0,27.5-22.3,49.8-49.8,49.8H49.8c-27.5,0-49.8-22.3-49.8-49.8v-103.9 v-122.3l0,0c0-25.8,20.9-46.7,46.7-46.7h93.4l4.4-18.6c6.7-28.8,32.4-49.2,62-49.2h74.1c29.6,0,55.3,20.4,62,49.2l4.3,18.6H440.3z M97.4,183.45c0-12.9-10.5-23.4-23.4-23.4c-13,0-23.5,10.5-23.5,23.4s10.5,23.4,23.4,23.4C86.9,206.95,97.4,196.45,97.4,183.45z M358.7,277.95c0-63.6-51.6-115.2-115.2-115.2s-115.2,51.6-115.2,115.2s51.6,115.2,115.2,115.2S358.7,341.55,358.7,277.95z"/> </g> </g> </g>
+
+    </svg><button id="myBtn" style="background-color: transparent; border: none; cursor: pointer; width: 8rem; color: white">Change cover</button>  <%= button_to "Delete", cover_image_user_path(@user), method: :delete, id: "myBtn", class: "btn", style: "background-color: transparent; border: none; cursor: pointer; color: white" %>
+</span>
+    <%# <div class="container" style="position: absolute; right: -21rem; top: 8rem"> %>
+      <%# <h1><%= user.name <span class="text-warning">★</span></h1> %>
+      <%# <p><%= user.state, <%= user.country</p> %> 
+      <%# <button class="btn btn-light">Share Profile</button> %>
+    <%# </div> %>
+  </div>
+<% else %>
+  <div class="profile-header" style="height: 14rem">
+    <span style="display: flex; align-items: center; color: #737373; cursor: pointer; position: absolute; top: 15rem; left: 84rem;">
+    <svg style="margin-right: 0.4rem" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#737373" height="20px" width="20px" version="1.1" id="Capa_1" viewBox="0 0 487 487" xml:space="preserve" stroke="#bababa">
+
+    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g id="SVGRepo_iconCarrier"> <g> <g> <path d="M308.1,277.95c0,35.7-28.9,64.6-64.6,64.6s-64.6-28.9-64.6-64.6s28.9-64.6,64.6-64.6S308.1,242.25,308.1,277.95z M440.3,116.05c25.8,0,46.7,20.9,46.7,46.7v122.4v103.8c0,27.5-22.3,49.8-49.8,49.8H49.8c-27.5,0-49.8-22.3-49.8-49.8v-103.9 v-122.3l0,0c0-25.8,20.9-46.7,46.7-46.7h93.4l4.4-18.6c6.7-28.8,32.4-49.2,62-49.2h74.1c29.6,0,55.3,20.4,62,49.2l4.3,18.6H440.3z M97.4,183.45c0-12.9-10.5-23.4-23.4-23.4c-13,0-23.5,10.5-23.5,23.4s10.5,23.4,23.4,23.4C86.9,206.95,97.4,196.45,97.4,183.45z M358.7,277.95c0-63.6-51.6-115.2-115.2-115.2s-115.2,51.6-115.2,115.2s51.6,115.2,115.2,115.2S358.7,341.55,358.7,277.95z"/> </g> </g> </g>
+
+    </svg><button id="myBtn" style="background-color: transparent; border: none; cursor: pointer; color: gray">Upload cover</button>
+    </span>
+  </div>
+<% end %>
+<% else %>
+<% if @user.cover_image.attached? %>
+<div class="profile-header" style="position: relative; background-image: url('<%= rails_blob_url(@user.cover_image) %>'); height: 14rem; background-repeat: no-repeat; background-size: cover;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
+
+  </div>
+<% else %>
+  <div class="profile-header" style="height: 14rem; background-color: #DEDFE4">
+  </div>
+<% end %>
+<% end %>
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <%= form_with(model: @user, local: true, class: "mx-auto p-4 shadow-sm rounded", style: "max-width: 600px; background-color: #f8f9fa;") do |form| %>
+      <% if user.errors.any? %>
+        <div class="alert alert-danger">
+          <h4 class="alert-heading"><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h4>
+          <ul>
+            <% user.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :cover_image, class: "form-label" %>
+    <%= form.file_field :cover_image, class: "form-control" %>
+  </div>
+
+  <div class="d-grid">
+    <%= form.submit "Save", class: "btn btn-block", style: "background-color: purple; color: white" %>
+  </div>
+  
+</div>
+
+<script>// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}</script>
+<%# /////////////////////// %>
+</div>
+    <div class="container" style="position: absolute; right: -21rem; top: 8rem; color: white">
+      <h1><%= user.name %> <span class="text-warning">★</span></h1>
+      <p><%= user.state %>, <%= user.country %></p>
+      <%# <button class="btn" style="background-color: #FF6633; color: white">Share Profile</button> %>
+      
+      <%= link_to "Share Profile", profile_shares_path(@user.id), data: {turbo_method: :post}, class: "btn", style: "background-color: #FF6633; color: white;"%>
+
+
+    </div>
+  </div>
+<% end %>
+  <!-- Profile Card -->
+  <div class="container" style="background-color: #f5f6f7">
+    <div class="row mt-5">
+      <div class="col-md-4">
+        <div class="profile-card" style="margin-top: 5rem;background-color: white; padding: 0.6rem 1.2rem ;position: relative; bottom: 14rem; box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.04);">
+          <% if user.avatar.attached? %>
+            <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden;">
+              <%= image_tag user.avatar, style: "width: 100%; height: 100%; object-fit: cover;" %>
+            </div>
+          <% else %>
+              <img src="https://via.placeholder.com/150" alt="User" class="rounded-circle me-3">
+          <% end %>
+          <h4><%= user.name %> </h4>
+          <p><%= user.state %>, <%= user.country %></p>
+          <% if @user != current_user %>
+            <%= turbo_frame_tag "follow_button_#{@user.id}" do %>
+              <% if current_user.following.include?(@user) %>
+                <%= button_to "Followed", unfollow_user_path(@user), method: :delete, class: "btn", style: "background-color: #FF6633; color: white", data: { turbo_frame: "follow_button_#{@user.id}" } %>
+              <% else %>
+                <%= button_to "Follow", follow_user_path(@user), method: :post, class: "btn", style: "background-color: #FF6633; color: white", data: { turbo_frame: "follow_button_#{@user.id}" } %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <hr>
+          <div class="about-section">
+            <h5>About</h5>
+              <% if user_signed_in? && current_user == @user %>
+              <% if user.bio.present? %>
+                <p class="text-muted" style="margin-bottom: -0.6rem"><%= user.bio %></p>
+                <%= link_to "Edit", edit_user_path(user), class: "btn btn-link", style:"margin-left: -0.8rem; margin-bottom: 0.6rem; color: #FF6633" %>
+              <% else %>
+                <%= link_to "Add bio", edit_user_path(user), class: "btn btn-link" %>
+              <% end %>
+              <% else %>
+                <% if user.bio.present? %>
+                <%= user.bio %>
+                <% end %>
+              <% end %>
+            <h5>Email</h5>
+            <p class="text-muted mb-1"><%= user.email %></p>
+            <div style="margin-top: 1rem">
+              <p>Followers: 
+                <strong>
+
+                  <%= turbo_frame_tag "followers_count_#{user.id}" do %>
+                    <%= @user.followers.count %>
+                  <% end %>
+                </strong>
+              </p>
+              <p>Following: 
+                <strong>
+                  <%= turbo_frame_tag "following_count_#{current_user.id}" do %>
+                    <%= @user.following.count %>
+                  <% end %>
+                </strong>
+              </p>
+              <p>Articles: <strong><%= @user_articles.count %></strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8" style="margin-top: 2rem">
+        <div class="track-card shadow-sm" style="width: 45rem; background-color: white">
+          <h5 style="font-size: 3rem; color: #FF6633; margin-left: 3.5rem; margin-top: 1.2rem"><% if user.intro_video.present? %><%= user.intro_video.title %><% end %></h5>
+          <div class="audio-player mt-3" style="margin-left: 3.5rem">
+            <% if user.intro_video.present? && user.intro_video.video.attached? %>
+              <%# <%= image_tag @user.intro_video.preview(:thumb) %>
+              <p style="position: relative; bottom: 0.1rem"><%= user.intro_video.description %></p>
+              <%# <%= user.intro_video.description %> 
+              <%= video_tag user.intro_video.video, controls: true, width: "600" %>
+              <%= link_to "change video", intro_video_user_path(@user), class: "btn", style: "color: gray; margin-bottom: 1.9rem" %>
+              <% else %>
+              <%# <button class="btn btn-danger">Add Intro</button> %>
+              <%# <%= link_to "Add Intro", intro_video_user_path(@intro_video), class: "btn btn-link text-muted", style:"margin-left: -0.8rem; margin-bottom: 0.6rem" %> 
+              <div style="padding: 1rem 0">
+              <%= form_with(model: IntroVideo.new, url: intro_video_user_path(@user)) do |form| %>
+                <%= form.file_field :video %>
+                <%= form.submit 'Upload Intro Video' %>
+              <% end %>
+              </div>
+                <%# <%= video_tag @introvideo.video.preview(:thumb) %> 
+
+            <% end %>
+          </div>
+          <%# <hr> %>
+          <%# <div class="track-actions">
+            <button class="btn btn-outline-primary me-2">Like</button>
+            <button class="btn btn-outline-secondary">Share</button>
+          </div> %>
+        </div>
+
+        <%# <%= render 'intro_videos/index', user: @user %>
+      <% if user.intro_video.present? && user.intro_video.video.attached? %>
+        <div class="existing-comments mt-4">
+        <% if @user.intro_video.user_comments.count == 0 %>
+          <p>No Comments</p>
+        <% elsif @user.intro_video.user_comments.count == 1 %>
+          <p>Comment: <%= @user.intro_video.user_comments.count %></p>
+        <% else %>
+          <p>Comments: <%= @user.intro_video.user_comments.count %></p>
+        <% end %>
+
+          <div style="background-color: white; width: 45rem; padding-left: 1rem" class="shadow-sm pt-2">
+          <% if @comment.any? %>
+            <% @comment.each do |comment| %>
+              <div class="comment d-flex mb-3">
+                <% if comment.user.avatar.attached? %>
+                  <div class="comment-user-avatar rounded-circle overflow-hidden" style="width: 50px; height: 50px;">
+                    <%= image_tag comment.user.avatar, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+                  </div>
+                <% else %>
+                  <img src="https://via.placeholder.com/50" alt="User avatar" class="rounded-circle" />
+                <% end %>
+                  <div class="comment-body ms-3">
+                    <h6 class="comment-user-name mb-0"><%= comment.user.name %></h6>
+                    <p class="comment-text mb-0" style="font-weight: light"><%= comment.content %></p>
+
+                    <% if user_signed_in? %>
+                      <% if comment.reactions.where(user_id: current_user.id).present? %>
+                        <div style="display: inline-block; margin-right: 1rem;">
+                          <%= link_to "Liked", user_user_comment_react_user_comment_path(@user, comment), data: { turbo_method: :delete }, style:"font-size: 0.8rem; color: blue; margin-right: 0.0rem; position: relative; top: -0.3rem" %>
+                          <span style="font-size: 0.8rem; color: blue; position: relative; top: -0.3rem">(<%= comment.reactions.count %>)</span>
+                        </div>
+                      <% else%>
+                      <div style="display: inline-block; margin-right: 1rem;">
+                        <%= link_to "Like", user_user_comment_unreact_user_comment_path(@user, comment), data: { turbo_method: :post }, style:"font-size: 0.8rem; color: gray; margin-right: 0.1rem; position: relative; top: -0.3rem" %>
+                        <span style="font-size: 0.8rem; color: gray; position: relative; top: -0.3rem">(<%= comment.reactions.count %>)</span>
+                      </div>
+                      <% end %>
+                      <% if comment.user == current_user %>
+                        <%= link_to "delete", user_user_comment_path(@user, comment), data: { turbo_method: :delete }, style:"font-size: 0.8rem; color: gray; font-style: italic; position: relative; top: -0.3rem" %>
+                      <% end %>
+                    <% end %>
+
+                  </div>
+              </div>
+            <% end %>
+          <% end %>
+          </div>
+        </div>
+      <% end %>
+        <div class="comment-section">
+
+            <%# ??????????????? %>
+        <% if user.intro_video.present? && user.intro_video.video.attached? %>
+          <%= form_with(model: [@user, UserComment.new ], url: user_user_comments_path(@user), local: true, class: "form") do |form| %>
+            <div class="d-flex align-items-start mb-4">
+              <!-- User Avatar -->
+              <% if current_user && current_user.avatar.present? %>
+                <div class="user-avatar rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px;">
+                  <%= image_tag current_user.avatar, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+                </div>
+              <% end %>
+
+
+              <!-- Comment Input Field -->
+              <div class="flex-grow-1" style="margin: 0.4rem">
+                <div class="input-group" style=" width: 20rem">
+                  <%= form.text_area :content, class: "form-control", placeholder: "Add a comment...", rows: 1, style: "resize: none;" %>
+                  <button class="btn btn-primary" style="background-color: #FF6633; border: none" type="submit">Submit</button>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+
+        
+
+
+
+        
+            <%# ??????????????? %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

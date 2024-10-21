@@ -1,0 +1,46 @@
+<%= form_with(model: @user, local: true, class: "mx-auto p-4 shadow-sm rounded", style: "max-width: 600px; background-color: #f8f9fa;") do |form| %>
+  <% if user.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h4>
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :avatar, class: "form-label" %>
+    <%= form.file_field :avatar, class: "form-control" %>
+  </div>
+
+  <div class="mb-3" style="color: white">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3" style="color: white">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.text_field :email, class: "form-control" %>
+  </div>
+
+  <div class="mb-3" style="color: white">
+    <%= form.label :country, class: "form-label" %>
+    <%= form.text_field :country, class: "form-control" %>
+  </div>
+
+  <div class="mb-3" style="color: white">
+    <%= form.label :state, class: "form-label" %>
+    <%= form.text_field :state, class: "form-control" %>
+  </div>
+
+  <div class="mb-3" style="color: white">
+  <%= form.label :bio, class: "form-label" %>
+  <%= form.text_area :bio, class: "form-control", rows: 3 %>
+  </div>
+
+  <div class="d-grid">
+    <%= form.submit "Save Changes", class: "btn btn-block", style: "background-color: purple; color: white" %>
+  </div>
+<% end %>

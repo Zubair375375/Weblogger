@@ -1,0 +1,33 @@
+<div class="existing-comments mt-4">
+  <% if article.comments.count == 0 %>
+  <p>No Comments</p> <!-- Debug line -->
+<% elsif article.comments.count == 1 %>
+  <p>Comment: <%= article.comments.count %></p>
+<% else %>
+  <p>Comments: <%= article.comments.count %></p>
+<% end %>
+
+  <% article.comments.each do |comment| %>
+    <div class="comment d-flex mb-3">
+      <!-- Comment User Avatar -->
+      <% if comment.user.avatar.attached? %>
+        <div class="comment-user-avatar rounded-circle overflow-hidden" style="width: 50px; height: 50px;">
+          <%= image_tag comment.user.avatar, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+        </div>
+      <% else %>
+        <img src="https://via.placeholder.com/50" alt="User avatar" class="rounded-circle" />
+      <% end %>
+
+      <!-- Comment Body -->
+      <%# <div style="width: 50rem; display: flex;> %>
+        <div class="comment-body ms-3">
+          <h6 class="comment-user-name mb-0"><%= comment.user.name %></h6>
+          <p class="comment-text mb-0"><%= comment.body %></p>
+          <% if user_signed_in? && comment.user == current_user %>
+            <%= link_to "delete", article_comment_path(article,comment), data: { "turbo-method": :delete }, style:"font-size: 0.8rem; color: gray; position: relative; top: -0.4rem" %>
+          <% end %>
+        </div>
+      <%# </div> %>
+    </div>
+  <% end %>
+</div>

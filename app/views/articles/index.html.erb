@@ -1,0 +1,468 @@
+<nav class="navbar navbar-expand-md navbar-light" style="background-color: #FF6633; position: fixed; z-index: 10; top: 0; width: 100%">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white" href="#">
+      <img src="<%= asset_path('logo.png') %>" alt="Logo" style="width: 6rem; margin-left: 1rem"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon "></span>
+    </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Link</a>
+        </li>
+      </ul>
+      <%# <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> %>
+    </div>
+
+      <!-- User Dropdown -->
+      <div class="dropdown">
+        <a class="d-flex align-items-center" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <%# <img src="https://via.placeholder.com/40" class="rounded-circle" alt="User Image" style="width: 40px; height: 40px;"> %>
+          <% if @user.avatar.attached? %>
+            <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; width: 40px; height: 40px;" class="rounded-circle" alt="User Image">
+          <%= image_tag current_user.avatar, class: "rounded-circle", style: "width: 40px; height: 40px; object-fit: cover;" %>
+            </div>
+          <% else %>
+            <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; width: 40px; height: 40px;" class="rounded-circle" alt="User Image">
+              <img src="https://via.placeholder.com/40" alt="User" class="rounded-circle me-3">
+            </div>
+          <% end %>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li><%= link_to "See profile", user_path(@user), class: "dropdown-item" %></li>
+          <li><%= link_to "Edit Profile", edit_user_path(@user), class: "dropdown-item" %></li>
+          <li><%= link_to "Log out", destroy_user_session_path, class: "dropdown-item" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="d-flex h-100 text-center text-bg-dark" __processed_27a6fff7-e350-4bbe-b543-80e333716a53__="true">
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"></path>
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path>
+      </symbol>
+    </svg>
+
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+      <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (light)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light" aria-pressed="true">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+            Light
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+            Dark
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+        <li>
+          <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="false">
+            <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+            Auto
+            <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    
+<div class="cover-container d-flex p-3 mx-auto flex-column" style="background-image: url('https://images.unsplash.com/photo-1478641300939-0ec5188d3802?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGRhcmslMjBibG9nfGVufDB8fDB8fHww'); background-size: cover; background-position: center; height: 100vh; width: 100vw; background-repeat: no-repeat;">
+  <header class="mb-auto">
+    <div class="text-white">
+      
+    </div>
+  </header>
+
+  <main class="px-3">
+    <h1 class="display-2 text-white mb:1" style="font-weight: 650; width: 35rem; text-align: left; line-height: 4rem">The Ultimate <span style="color: #FF6633">Guide</span> to Ruby on Rails.</h1>
+    <p class="lead text-white" style="text-align: left; width: 40rem">This lede captures the essence of the blog post, setting clear expectations and inviting readers to explore the content.</p>
+    <p class="lead" style="text-align: left;">
+      <a href="#" class="btn btn-lg btn-light fw-bold border-white text-white" style="background-color: #FF6633; border: none">Learn more</a>
+    </p>
+  </main>
+
+  <footer class="mt-auto text-white-50">
+    <%# <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p> %>
+  </footer>
+</div>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</div>
+<%# <nav class="navbar">
+        <div class="brand">BROWNY</div>
+        <ul>
+            <li><a href="#">Education</a></li>
+            <li><a href="#">Skills</a></li>
+            <li><a href="#">Experience</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Clients</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hi, I am <span>Browny Star</span></h1>
+            <p>UI/UX Designer and Web Developer</p>
+            <a href="#" class="download-btn">Download Resume</a>
+        </div>
+    </section> %>
+		
+    
+<div __processed_ddea42ca-581d-487d-ae3f-1c16075b13b6__="true">
+    
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1">
+        <a class="link-secondary" href="#" style="visibility: hidden">Subscribe</a>
+      </div>
+
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <a class="link-secondary" href="#" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
+        </a>
+        <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+      </div>
+    </div>
+  </header>
+
+</div>
+
+<main class="container" style="">
+
+<h1>Another Folder Index</h1>
+<%# <%= render 'profile_shares/profile_shared' %>
+
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row g-0 overflow-hidden flex-md-row mb-4 h-md-250 position-relative" style="width: 81rem">
+        <h1>Users</h1>
+        <%= User.count %> users
+            <div style="margin-top: 1rem">
+              <ul class="card-list overflow-auto">
+                <ul class="card-list">
+                  <div id="users" class="d-flex overflow-auto" style="white-space: nowrap; padding: 1rem;">
+                    <% if @users.present? %>
+                      <% @users.each do |user| %>
+                        <div class="card shadow-md me-3" style="display: inline-block; width: 18rem; border: none">
+                          <div class="card-body text-center">
+                            <% if user.avatar.attached? %>
+                              <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin: auto;">
+                                <%= image_tag user.avatar, style: "width: 100%; height: 100%; object-fit: cover;" %>
+                              </div>
+                            <% else %>
+                              <div style="width: 120px; height: 120px; border-radius: 50%; background-color: #e0e0e0; margin: auto;">
+                                <p class="text-muted mb-0">No Avatar</p>
+                              </div>
+                            <% end %>
+                            <h5 class="card-title mt-3" style="margin-bottom: -0rem"><%= user.name %></h5>
+                            <p class="card-text" style="color: gray;"><%= truncate(user.bio, length:30) %></p>
+                            <%= link_to "See profile", user, class: "btn", style:"margin-top: -2rem; color: #FF6633" %>
+                          </div>
+                        </div>
+                      <% end %> 
+                    <% else %>
+                      <p>No users found.</p>
+                    <% end %>
+                  </div>
+                </ul>
+              </ul>
+            </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-5">
+    <div class="col-md-8">
+    
+
+      <article class="blog-post">
+        <h2 class="blog-post-title">The Journey of Learning Web Development</h2>
+        <p class="blog-post-meta">September 20, 2024 by <a href="#" style="color: #FF6633">Muhammad Zubair</a></p>
+
+        <p>Learning web development is a journey filled with challenges and rewards. Whether you're just starting or looking to refine your skills, this post will share my experiences, tips, and resources that helped me along the way.</p>
+
+        <h3>Getting Started</h3>
+        <p>When I first dipped my toes into web development, I was overwhelmed by the sheer amount of information available. Here are a few steps I took to simplify my learning process:</p>
+        <ul>
+          <li><strong>Choose a Language:</strong> I started with HTML and CSS. These languages are the building blocks of the web.</li>
+          <li><strong>Online Courses:</strong> Platforms like Codecademy and freeCodeCamp were invaluable for structured learning.</li>
+          <li><strong>Practice Regularly:</strong> Building small projects helped me apply what I learned.</li>
+        </ul>
+
+        <h3>Key Resources</h3>
+        <p>Here are some resources that I found particularly helpful:</p>
+        <ol>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" style="color: #FF6633">MDN Web Docs</a> - Comprehensive documentation on web technologies.</li>
+          <li><a href="https://css-tricks.com/" target="_blank" style="color: #FF6633">CSS-Tricks</a> - A treasure trove of tips and tutorials for CSS.</li>
+          <li><a href="https://stackoverflow.com/" target="_blank" style="color: #FF6633">Stack Overflow</a> - A great place to ask questions and find solutions to coding problems.</li>
+        </ol>
+
+        <h3>Building Projects</h3>
+        <p>As I gained confidence, I began building my projects. Here are a few examples:</p>
+        <dl>
+          <dt>Personal Portfolio</dt>
+          <dd>A showcase of my skills and projects, allowing potential employers to see my work.</dd>
+          <dt>Blog Platform</dt>
+          <dd>A simple blog where I can write about my learning journey and share knowledge.</dd>
+          <dt>E-commerce Website</dt>
+          <dd>A project that involved implementing payment processing and a shopping cart.</dd>
+        </dl>
+
+        <h3>Overcoming Challenges</h3>
+        <p>Every developer faces challenges. Here’s how I tackled a few:</p>
+        <blockquote class="blockquote">
+          <p>“The only way to do great work is to love what you do.” — Steve Jobs</p>
+        </blockquote>
+        <p>When I struggled with JavaScript, I took a step back, practiced with smaller problems, and gradually built my way up. The key is persistence.</p>
+
+        <h3>Future Goals</h3>
+        <p>As I continue my journey, my goals include:</p>
+        <ul>
+          <li>Learning advanced frameworks like React and Vue.js.</li>
+          <li>Contributing to open-source projects to give back to the community.</li>
+          <li>Staying updated with the latest web technologies and trends.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>Web development is not just a skill; it's a way of thinking. Embrace the challenges and enjoy the journey. Remember, every expert was once a beginner.</p>
+
+        <h3>Join the Conversation</h3>
+        <p>What has your learning journey been like? Share your experiences in the comments below!</p>
+      </article>
+
+      <div style="margin-top: 1rem">
+      <% if @article.length >= 1 %>
+        <ul class="card-list" style="width: 80rem">
+          <% @article.each do |t| %>
+            <% unless t.archived? %>
+              <li class="card text-black" style="position: relative; overflow: hidden; margin-bottom: 2rem; border: none">
+                <% if t.image.attached? %>
+                  <div class="image-container" style="position: relative; overflow: hidden;">
+                    <%= image_tag t.image, class: "card-image", style: "height: 15rem; width: 100%; object-fit: cover;" %>
+                    <!-- Purple overlay -->
+                    <div class="image-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: background 0.3s ease; font-size: 3rem;"></div>
+                  </div>
+                <% end %>
+          <div class="comment d-flex align-items-center mb-3" style="display: flex; justify-content: space-between; margin: 0.6rem 0.6rem 0.6rem 0.6rem">
+            <div style="display: flex">
+              <% if t.user.avatar.attached? %>
+                <div class="comment-user-avatar rounded-circle overflow-hidden" style="width: 50px; height: 50px; margin-right: 10px;">
+                  <%= image_tag t.user.avatar, style: 'width: 100%; height: 100%; object-fit: cover;' %>
+                </div>
+              <% end %>
+              <div class="comment-content">
+                <h6 class="comment-user-name mb-0">
+                  <%= link_to t.user.name, article_path(t), style: "color: black; text-decoration: none;" %>
+                </h6>
+              </div>
+            </div>
+            <div style="font-size: 0.7rem; color: gray; font-style: italic; position: relative; top: 1rem">
+              <%= time_ago_in_words(t.created_at) %>
+            </div>
+          </div>
+
+                <!-- Three-dot dropdown button -->
+                <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
+                  <button class="btn btn-secondary  text-black" type="button"  style="background-color: transparent; border: none;">
+                    <i class="fas fa-ellipsis-v"></i>
+                  </button>
+                </div>
+
+
+                <%# <a class="card-link"> %>
+                  <%# <%= link_to t.title, t, style: "text-decoration: none; color: #333; font-size: 1.3rem; font-weight: bold; display: block; text-align: center; margin-bottom: 0.5rem;" %> 
+                <%# </a> %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+        <%= link_to "Create New", new_article_path, class: "btn btn-success btn-lg my-3", style: "background-color: #FF6633; border: none" %>
+        <%= link_to "See all", home_path, class: "btn btn-success btn-lg my-3", style: "background-color: #FF6633; border: none" %>
+        
+        
+      <% end %>
+
+      </div>
+
+      
+      <article class="blog-post">
+  <h2 class="blog-post-title">Essential Skills for Modern Web Development</h2>
+  <p class="blog-post-meta">September 20, 2023 by <a href="#" style="color: #FF6633">Jordan Lee</a></p>
+
+  <p>Web development is a rapidly evolving field that requires a diverse skill set. Whether you’re a beginner or an experienced developer, understanding the key skills needed can help you stay ahead. In this post, we’ll discuss the essential skills every web developer should master.</p>
+
+  <blockquote>
+    <p>“The best way to predict the future is to invent it.” — Alan Kay</p>
+  </blockquote>
+
+  <h3>Core Technologies</h3>
+  <p>At the foundation of web development are three core technologies:</p>
+  
+  <ul>
+    <li><strong>HTML:</strong> The backbone of any web page, providing structure and content.</li>
+    <li><strong>CSS:</strong> Responsible for styling and layout, making the web visually appealing.</li>
+    <li><strong>JavaScript:</strong> Adds interactivity and dynamic behavior to websites.</li>
+  </ul>
+
+  <h3>Frameworks and Libraries</h3>
+  <p>Familiarity with frameworks can significantly boost your productivity:</p>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Framework/Library</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>React</td>
+        <td>A JavaScript library for building user interfaces, particularly for single-page applications.</td>
+      </tr>
+      <tr>
+        <td>Bootstrap</td>
+        <td>A CSS framework that provides pre-designed components for responsive web design.</td>
+      </tr>
+      <tr>
+        <td>Node.js</td>
+        <td>A JavaScript runtime that allows you to build server-side applications.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Version Control and Collaboration</h3>
+  <p>In a collaborative environment, version control systems like Git are essential:</p>
+  
+  <ol>
+    <li><strong>Track Changes:</strong> Easily manage and track changes to your codebase.</li>
+    <li><strong>Collaboration:</strong> Work seamlessly with others on the same project.</li>
+    <li><strong>Branching:</strong> Experiment with new features without affecting the main codebase.</li>
+  </ol>
+
+  <h3>Responsive Design</h3>
+  <p>With the variety of devices available today, responsive design is crucial:</p>
+  
+  <ul>
+    <li><strong>Fluid Grids:</strong> Use relative units like percentages instead of fixed units.</li>
+    <li><strong>Media Queries:</strong> Apply different styles based on the device’s screen size.</li>
+    <li><strong>Flexible Images:</strong> Ensure images resize within their containing elements.</li>
+  </ul>
+
+  <h3>Conclusion</h3>
+  <p>Mastering these skills will equip you to tackle the challenges of modern web development. Whether you’re building a simple website or a complex application, a strong foundation in these areas will set you up for success.</p>
+
+  <h3>Join the Conversation</h3>
+  <p>What skills do you think are essential for web development? Share your thoughts in the comments below!</p>
+</article>
+
+<h1> HEHE </h1>
+<article class="blog-post">
+  <h2 class="blog-post-title">Introducing Our New Feature: Live Collaboration</h2>
+  <p class="blog-post-meta">September 20, 2023 by <a href="#" style="color: #FF6633">Chris</a></p>
+
+  <p>We're excited to announce a new feature that enhances productivity for developers: Live Collaboration! This feature allows multiple users to work on the same project simultaneously, making teamwork more efficient and seamless.</p>
+
+  <h3>Key Highlights</h3>
+  <ul>
+    <li><strong>Real-Time Editing:</strong> Experience instant updates as team members make changes, ensuring everyone is on the same page.</li>
+    <li><strong>Integrated Chat:</strong> Communicate with your team without leaving the editor, making discussions more fluid and organized.</li>
+    <li><strong>Version History:</strong> Easily track changes and revert to previous versions, ensuring that no work is lost.</li>
+  </ul>
+
+  <p>This feature is designed to improve the workflow for both remote and in-house teams, making it easier to collaborate on complex projects. We believe that these enhancements will greatly benefit developers by fostering a more connected environment.</p>
+
+  <h3>How to Get Started</h3>
+  <p>To start using Live Collaboration, simply create or open an existing project and invite your team members to join. You’ll find the new collaboration tools in the toolbar. Dive in and explore the capabilities this feature brings to your workflow!</p>
+
+  <p>We can’t wait to hear your feedback and see how you use Live Collaboration to enhance your projects. Stay tuned for more updates!</p>
+</article>
+
+
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-primary" href="#">Back To Top</a>
+      </nav>
+
+    </div>
+
+    <%# <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic", style="color: purple">About</h4>
+          <p class="mb-0", style="color: purple">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+        </div>
+
+<div class="p-4">
+  <h4 class="fst-italic", style="color: purple">Archives</h4>
+  <ol class="list-unstyled mb-0">
+    <li><a href="#", style="color: purple">September 2024 - JavaScript Performance Tuning</a></li>
+    <li><a href="#", style="color: purple">August 2024 - Building Responsive Websites with Flexbox</a></li>
+    <li><a href="#", style="color: purple">July 2024 - Introduction to Web Accessibility</a></li>
+    <li><a href="#", style="color: purple">June 2024 - Modern CSS Grid Layout Techniques</a></li>
+    <li><a href="#", style="color: purple">May 2024 - How to Secure Your Web Applications</a></li>
+    <li><a href="#", style="color: purple">April 2024 - Top 10 JavaScript Frameworks</a></li>
+    <li><a href="#", style="color: purple">March 2024 - RESTful API Design Best Practices</a></li>
+    <li><a href="#", style="color: purple">February 2024 - Building Scalable Frontends</a></li>
+    <li><a href="#", style="color: purple">January 2024 - Introduction to Next.js</a></li>
+    <li><a href="#", style="color: purple">December 2023 - Mastering State Management in React</a></li>
+    <li><a href="#", style="color: purple">November 2023 - Optimizing Web Performance</a></li>
+    <li><a href="#", style="color: purple">October 2023 - Serverless Architecture in 2023</a></li>
+  </ol>
+</div>
+
+<div class="p-4">
+  <h4 class="fst-italic", style="color: purple">Elsewhere</h4>
+  <ol class="list-unstyled">
+    <li><a href="https://github.com/", style="color: purple">GitHub - My Web Dev Projects</a></li>
+    <li><a href="https://twitter.com/", style="color: purple">Twitter - Web Dev Tips & News</a></li>
+    <li><a href="https://www.linkedin.com/", style="color: purple">LinkedIn - Connect with Me</a></li>
+  </ol>
+</div>
+
+      </div>
+    </div>
+  </div> %>
+
+</main>
+
+<footer class="blog-footer">
+  <p>
+    <a href="#">Back to top</a>
+  </p>
+</footer>
+
+
+    
+  
+
+</body>
